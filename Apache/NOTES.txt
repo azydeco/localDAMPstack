@@ -1,0 +1,43 @@
+
+source links : 
+https://hub.docker.com/_/httpd
+
+
+# other links. 
+https://www.pascallandau.com/blog/php-php-fpm-and-nginx-on-docker-in-windows-10/#setup-php-cli
+http://www.inanzzz.com/index.php/post/su76/creating-apache-mysql-and-php-fpm-containers-for-a-web-application-with-docker-compose
+https://www.cloudreach.com/en/resources/blog/ct-apache-docker-containers/
+
+
+To get the .conf file out of the image...
+$ docker run --rm httpd:2.4 cat /usr/local/apache2/conf/httpd.conf > httpd.conf
+$ docker run --rm httpd:2.4 cat /usr/local/apache2/conf/extra/httpd-vhosts.conf > vhosts-httpd.conf
+
+Take note in WINDOWS you need to set Visual Studiocode to save files using UTF-8 and LF ( not CRCLF ) 
+you can find those settings along the blue bar of the window at the bottom 
+
+
+
+Then you need a Docker compose
+
+FROM httpd:2.4
+COPY ./httpd.conf   /usr/local/apache2/conf/httpd.conf
+COPY ./vhosts-httpd.conf  /usr/local/apache2/conf/extra/httpd-vhosts.conf
+RUN chown www-data:www-data /usr/local/apache2/conf/httpd.conf \
+  && chown www-data:www-data  /usr/local/apache2/conf/extra/httpd-vhosts.conf
+EXPOSE 8080
+CMD ["httpd-foreground"]
+
+
+Then, run the commands to build and run the Docker image:
+
+$ docker build -t mylocalapache .
+
+
+$ docker container run -p 80:8080 -it --name myapache mylocalapache
+$ docker container run -p 80:8080 -v  /c/Users/nikbutler/OneDrive/Documents/GitHub/Knowledgeniches/knowledgeniches/public:/usr/local/apache2/htdocs  -it --name myapache localapache
+
+
+
+
+
