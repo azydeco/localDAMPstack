@@ -1,0 +1,5 @@
+# exclude everything
+public_html/*
+
+# exception to the rule
+!public_html/.keep 
