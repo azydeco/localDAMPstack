@@ -26,6 +26,10 @@ services:
         - backend
       environment:
         - MYSQL_ROOT_PASSWORD=rootpassword
+  cli:
+      image: wordpress:cli
+      volumes:
+        - ./public_html:/var/www/html/
 networks:
   frontend:
   backend:  
