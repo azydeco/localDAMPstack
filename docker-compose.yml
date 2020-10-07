@@ -33,11 +33,16 @@ services:
          MYSQL_ROOT_PASSWORD: secret
   cli:
       image: wordpress:cli
+      environment: 
+        - APACHE_RUN_USER="www-data"
+        - APACHE_RUN_GROUP="www-data"
+      depends_on: 
+        - db
       networks:
         - frontend
         - backend
       volumes:
-        - ./public_html:/var/www/html/
+        - "./public_html:/var/www/html/:rw"
 networks:
   frontend:
   backend:  
