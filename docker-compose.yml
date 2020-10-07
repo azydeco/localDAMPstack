@@ -33,6 +33,9 @@ services:
          MYSQL_ROOT_PASSWORD: secret
   cli:
       image: wordpress:cli
+      networks:
+        - frontend
+        - backend
       volumes:
         - ./public_html:/var/www/html/
 networks:
