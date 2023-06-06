@@ -1,0 +1,1 @@
+openssl req -new -newkey rsa:4096 -days 3650 -nodes -x509 -subj  "/C=GB/ST=Localdomain/L=localhost/O=LocalServer/CN=localhost"  -keyout ./server.key -out ./server.crt
