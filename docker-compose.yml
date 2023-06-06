@@ -20,6 +20,8 @@ services:
       - backend
     ports:
       - "80:8080"
+      - "3000:8080"
+      - "443:443"
     volumes:
       - "./public_html:/var/www/html/:rw"
   db:
