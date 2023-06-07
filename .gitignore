@@ -1,6 +1,12 @@
 # exclude everything
 public_html/*
+Apache/ssl-certs/*
+Apache/vhosts/*
 
 # exception to the rule
 !public_html/.keep 
 !public_html/test.php
+!Apache/ssl-certs/.gitkeep
+!Apache/ssl-certs/README.md
+!Apache/vhosts/index.html
+!Apache/vhosts/.gitkeep
