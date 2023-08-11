@@ -36,6 +36,20 @@ services:
          MYSQL_USER: localdbuser
          MYSQL_PASSWORD: rootpassword
          MYSQL_ROOT_PASSWORD: secret
+  cli:
+      image: wordpress:cli
+      container_name: cli 
+      user: root
+      environment: 
+        - APACHE_RUN_USER="www-data"
+        - APACHE_RUN_GROUP="www-data"
+      depends_on: 
+        - db
+      networks:
+        - frontend
+        - backend
+      volumes:
+        - "./public_html:/var/www/html/:rw"
 networks:
   frontend:
   backend:  
