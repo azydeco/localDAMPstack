@@ -5,8 +5,10 @@ services:
     container_name: php
     networks:
       - backend
+      - frontend
     ports:
       - 9000:9000
+      - 9003:9003
     volumes:
       - "./public_html:/var/www/html/:rw"
   apache:
