@@ -26,6 +26,9 @@ services:
       restart: always
       networks:
         - backend
+        - frontend
+      ports:
+          - "3306:3306"
       environment:
          MYSQL_DATABASE: wpdb
          MYSQL_USER: localdbuser
