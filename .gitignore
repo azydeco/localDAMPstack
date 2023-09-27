@@ -8,5 +8,4 @@ Apache/vhosts/*
 !public_html/test.php
 !Apache/ssl-certs/.gitkeep
 !Apache/ssl-certs/README.md
-!Apache/vhosts/index.html
 !Apache/vhosts/.gitkeep
