@@ -57,10 +57,49 @@ ports:
 
 There are a some ports that you cannot use, so [use this page](https://www.browserstack.com/question/39572) as a reference if needed.
 
-### db
 
 If you have another container in docker called ***db*** you might need to change the name and references to it, or it may not run.
 
 ## Your content
 
 Add your content to the ***./public_html folder***
+#### Your content
+
+Add your content to the __./public_html folder__
+___
+
+## Starting the containers
+
+### ! Important
+
+The first time you run your docker stack you will need to make sure all the docker files have been rebuilt, if this step is not done, you will find your debug (xdebug) is probably not working.
+
+```sh
+docker compose up --build -d
+```
+
+After the initial install you can restart the stack using the following.
+
+```sh
+docker compose up -d # runs in detached mode 
+# or
+docker compose up  # keeps the terminal active and exits when command line is closed
+```
+
+You should now have the following in your Docker Desktop environment.
+
+![Alt text](images/image1.png)
+
+## WP CLI tool
+
+To run WP CLI tool
+
+```sh
+docker compose run --rm cli bash
+```
+
+then
+
+```sh
+wp core download # download current core Wp release
+```
