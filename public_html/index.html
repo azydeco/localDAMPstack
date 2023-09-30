@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/open-props" />
+    <title>Local DAMP stack</title>
+    <style>
+        *,
+        :root {
+
+            box-sizing: border-box;
+        }
+
+        body {
+            box-sizing: border-box;
+            min-height: 100vh;
+            color: var(--sand-1);
+            background-image: var(--gradient-8);
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            align-items: center;
+            font-family: var(--font-sans);
+        }
+
+        h1,
+        h2 {
+            font-size: var(--font-size-8);
+            text-transform: uppercase;
+            text-align: center;
+            background: var(--gradient-10);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            /* padding-top: 4rem; */
+            font-size: var(--font-size-3);
+            background: var(--gradient-4);
+            background-size: 50rem;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--orange-1);
+
+        }
+
+        a.php_test {
+            display: inline-block;
+            padding: .4rem;
+            background-color: var(--orange-8);
+            color: var(--orange-1);
+            border-radius: .5rem;
+
+
+            &:hover {
+
+                /* background-color: var(--orange-6);
+                color: var(--orange-0); */
+                animation: var(--animation-shake-x);
+            }
+        }
+
+        p {
+            text-align: center;
+        }
+
+        header {
+            width: 100vw;
+            display: flex;
+            justify-content: end;
+            /* border: solid 2px wheat; */
+        }
+
+        ul {
+            padding: 2rem;
+            /* border: solid 2px wheat; */
+            display: flex;
+            justify-content: end;
+            gap: 2rem;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        header ul {
+            min-height: 6rem;
+        }
+    </style>
+</head>
+
+
+<body>
+    <header>
+
+        <ul>
+            <li class="hidden" id="azydeco-website"><a href="/azydeco">Azydeco website</a></li>
+            <li class="hidden" id="jdorder"><a href="/jdorder">JD Order</a></li>
+        </ul>
+    </header>
+    <h1>azydeco <br /> Local DAMP stack</h1>
+    <p>Congratulations 🥳🎆 your Azydeco DAMP stack is up and running!
+    </p>
+    <p class="hidden" id='php_working'>PHP is configured correctly, and working as expected 😁.</p>
+    <p class="hidden" id='php-not-working'>PHP is not working 🥺 seems to be a error with your setup</p>
+
+    <div id="php_section" class="hidden">
+
+        <a class="php_test" href="/test.php">👉🏼 Now check your php is setup correctly 👈🏼</a>
+    </div>
+
+    <script defer>
+
+        async function checkPhp() {
+            try {
+
+                const req = await fetch('/test.php')
+                console.log(req.status)
+                const body = await req.body
+                const element = document.getElementById('php_working')
+                if (body && req.status === 200) {
+                    console.log(body)
+                    element.classList.remove('hidden')
+                } else {
+                    element.innerText = `PHP is not working 🥺 the server returned '${req.status} ${req.statusText}' for the file test.php`
+                    element.classList.remove('hidden')
+                }
+
+            } catch (e) {
+                const element = document.getElementById('php-not-working')
+                element.classList.remove('hidden')
+            }
+        }
+
+        async function checkForProjects(name) {
+            try {
+                const req = await fetch(`/${name}/`)
+                if (req.status === 200) {
+                    if (typeof name === 'string') {
+                        if (name.toLocaleLowerCase().includes('azydeco')) {
+                            const element = document.getElementById('azydeco-website')
+                            element.classList.remove('hidden')
+                        }
+                        else if (name.toLocaleLowerCase().includes('jdorder')) {
+                            const element = document.getElementById('jdorder')
+                            element.classList.remove('hidden')
+                        }
+                    }
+                }
+            } catch (error) {
+
+            }
+        }
+
+        document.onreadystatechange = () => {
+            if (document.readyState === 'complete') {
+                checkPhp()
+
+                const sites = [
+                    'azydeco', 'azydeco-website', 'jdorder'
+                ].forEach(name => checkForProjects(name))
+
+            } else {
+                console.log(document.readyState)
+            }
+        }
+    </script>
+</body>
+
+</html>
