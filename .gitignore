@@ -6,6 +6,8 @@ Apache/vhosts/*
 # exception to the rule
 !public_html/.keep 
 !public_html/test.php
+!public_html/index.html
 !Apache/ssl-certs/.gitkeep
 !Apache/ssl-certs/README.md
 !Apache/vhosts/.gitkeep
+!Apache/vhosts/example.conf
