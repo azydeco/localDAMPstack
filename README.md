@@ -104,7 +104,6 @@ then
 wp core download # download current core Wp release
 ```
 
-
 open the public_html folder and change **wp-config-sample.php** to **wp-config.php** and then change the following
 
 ```php
