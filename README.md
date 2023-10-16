@@ -90,7 +90,7 @@ You should now have the following in your Docker Desktop environment.
 
 ![Alt text](images/image1.png)
 
-## WP CLI tool
+## WP CLI tool / Install wordpress
 
 To run WP CLI tool
 
@@ -103,3 +103,23 @@ then
 ```sh
 wp core download # download current core Wp release
 ```
+
+
+open the public_html folder and change **wp-config-sample.php** to **wp-config.php** and then change the following
+
+```php
+// ** Database settings - You can get this info from your web host ** //
+/** The name of the database for WordPress */
+define('DB_NAME', 'wordpress');
+
+/** Database username */
+define('DB_USER', 'root');
+
+/** Database password */
+define('DB_PASSWORD', 'secret');
+
+/** Database hostname */
+define('DB_HOST', 'db');
+```
+
+now navigate to [http://localhost:3000/wp-admin/install.php](http://localhost:3000/wp-admin/install.php) to finish the install process.
